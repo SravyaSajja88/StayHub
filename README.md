@@ -1,4 +1,4 @@
-# MERN Hotel Booking App
+# StayHub
 
 A full-stack web application for hotel booking built with the MERN stack (MongoDB, Express.js, React, Node.js). Users can search for hotels, view details, make bookings, and manage their hotels if they are hosts.
 
