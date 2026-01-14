@@ -38,7 +38,6 @@ A full-stack web application for hotel booking built with the MERN stack (MongoD
 - **React Router** - Client-side routing
 - **Tailwind CSS** - Utility-first CSS framework
 - **React Icons** - Icon library
-- **React Query** - Data fetching (used in some components)
 
 ### Backend
 - **Node.js** - Runtime environment
