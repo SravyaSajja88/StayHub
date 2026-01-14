@@ -26,9 +26,6 @@ A full-stack web application for hotel booking built with the MERN stack (MongoD
 - View booking details and summary
 - Manage your bookings
 
-### Responsive Design
-- Mobile-friendly UI built with Tailwind CSS
-- Modern and intuitive user interface
 
 ## Tech Stack
 
