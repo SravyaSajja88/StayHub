@@ -1,14 +1,16 @@
 import { signout as signOutFunc} from "../api-client.js"
+import { useNavigate } from "react-router-dom";
 import {useContext} from "react";
 import {AppContext} from "../contexts/AppContext.jsx";
 const SignOutButton = () => {
-    const { refreshAuth, showToast } = useContext(AppContext);
+    const { logout, showToast } = useContext(AppContext);
+    const navigate = useNavigate();
     const signout = async() => {
         try{
             await signOutFunc();
-            await refreshAuth();
+            logout();
             showToast('success','Logout successful!');
-            
+            navigate('/');
         }
         
         catch(error) {

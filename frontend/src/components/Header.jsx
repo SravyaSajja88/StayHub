@@ -14,8 +14,8 @@ const Header = () => {
                 <span className="flex space-x-2">
                     {isLoggedIn ? 
                         (<>
-                        <Link to="/my-bookings" className="flex items-center text-blue-600 px-3 font-bold hover:bg-gray-100 bg-white cursor-pointer">My Bookings</Link>
-                        <Link to="/my-hotels" className="flex items-center text-blue-600 px-3 font-bold hover:bg-gray-100 bg-white cursor-pointer">My Hotels</Link>
+                        <Link to="/my-bookings" className="flex items-center text-blue-200 px-3 font-bold hover:bg-blue-700 cursor-pointer">My Bookings</Link>
+                        <Link to="/my-hotels" className="flex items-center text-blue-200 px-3 font-bold hover:bg-blue-700 cursor-pointer">My Hotels</Link>
                         <SignOutButton/> </>):
                         (<Link to="/sign-in" className="flex items-center text-blue-600 px-3 font-bold hover:bg-gray-100 bg-white cursor-pointer">Sign In</Link>)
                     }

@@ -28,7 +28,7 @@ router.post('/login',
                 return res.status(400).json({message:"Invalid credentials"});
             }
             const token = jwt.sign({id: user._id},process.env.JWT_SECRET_KEY, {expiresIn:'1d'});
-            res.cookie('auth_token',token, {httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite: "lax",path: '/',maxAge:24*60*60*1000});
+            res.cookie('auth_token',token, {httpOnly:true,secure:false,sameSite: "lax",path: '/',maxAge:24*60*60*1000});
             res.sendStatus(200);
 
         }
@@ -42,7 +42,7 @@ router.post('/login',
 router.post('/logout',(req,res)=>{
     res.clearCookie('auth_token',{
         httpOnly:true,
-        secure:process.env.NODE_ENV==='production',
+        secure:false,
         sameSite: 'lax'
     });
     res.sendStatus(200);

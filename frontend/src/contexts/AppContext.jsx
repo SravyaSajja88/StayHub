@@ -1,10 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { validateToken } from "../api-client";
+import { loadStripe } from "@stripe/stripe-js";
+
+const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 
 const AppContext = createContext();
 const AppContextProvider = ({ children }) =>{
     const [toast,setToast] = useState(null);
     const [timeoutId, setTimeoutId] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(null); // null = unknown, true/false known
 
     const showToast = (type,message) => {
         setToast({type,message});
@@ -18,33 +22,36 @@ const AppContextProvider = ({ children }) =>{
         setTimeoutId(id);
     }
 
-    const [isLoggedIn, setIsLoggedIn] = useState(null); // null = unknown, true/false known
+    
+
+    const login = () => setIsLoggedIn(true);
+    const logout = () => setIsLoggedIn(false);
 
     const refreshAuth = async () => {
         try {
             await validateToken();
             setIsLoggedIn(true);
-        } catch (err) {
+        } catch {
             setIsLoggedIn(false);
         }
     };
-
+    
     useEffect(() => {
-        let mounted = true;
-        const checkToken = async () => {
-            try {
-                await validateToken();
-                if (mounted) setIsLoggedIn(true);
-            } catch (err) {
-                if (mounted) setIsLoggedIn(false);
-            }
+        const checkAuth = async () => {
+        try {
+            await validateToken();
+            setIsLoggedIn(true);
+        } catch {
+            setIsLoggedIn(false);
+        }
         };
-        checkToken();
-        return () => { mounted = false; };
+        checkAuth();
     }, []);
 
+    const stripePromise = loadStripe(STRIPE_PUB_KEY);
+
     return(
-        <AppContext.Provider value={{ toast, showToast, isLoggedIn, refreshAuth }}>
+        <AppContext.Provider value={{ showToast, isLoggedIn, login, logout, refreshAuth, stripePromise }}>
             {children}
             {toast && (
                 <div className="fixed top-4 right-4 z-50">

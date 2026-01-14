@@ -1,18 +1,17 @@
 import {useForm} from 'react-hook-form';
 import {Link,useNavigate} from 'react-router-dom';
-import { login } from '../api-client.js';
+import { login as login1 } from '../api-client.js';
 import {useContext} from 'react';
 import { AppContext } from '../contexts/AppContext.jsx';
 
 const SignIn = () => {
     const {register,handleSubmit,formState:{errors}} = useForm();
-    const { showToast, refreshAuth } = useContext(AppContext);
+    const { showToast, login } = useContext(AppContext);
     const navigate = useNavigate();
     const onSubmit = handleSubmit(async (data) => {
         try{
-            await login(data);
-
-            await refreshAuth();
+            await login1(data);
+            login();
             showToast('success','Login successful!');
             navigate('/');
         }

@@ -6,13 +6,13 @@ import { AppContext } from "../contexts/AppContext.jsx";
 
 const Register = () =>{
     const {register,handleSubmit,watch,formState:{errors}} = useForm();
-    const { showToast, refreshAuth } = useContext(AppContext);
+    const { showToast, login } = useContext(AppContext);
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data)=>{
         try{
             await apiRegister(data);
-            await refreshAuth(); // re-validate token after registration
+            login();
             showToast('success','Registration successful!');
             navigate('/');
         }
